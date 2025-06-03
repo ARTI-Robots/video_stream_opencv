@@ -110,6 +110,7 @@ virtual void do_capture() {
     ros::Rate camera_fps_rate(latest_config.set_camera_fps);
 
     int frame_counter = 0;
+    int frame_error_counter = 0;
     // Read frames as fast as possible
     capture_thread_running = true;
     while (nh->ok() && capture_thread_running && subscriber_num > 0) {
@@ -129,6 +130,14 @@ virtual void do_capture() {
             unsubscribe();
             subscribe();
           }
+          frame_error_counter++;
+          if (frame_error_counter > 100) {
+            NODELET_ERROR("Critical error: max number of not readable frames in a row reached!");
+            ros::shutdown();
+          }
+        }
+        else {
+          frame_error_counter = 0;
         }
 
         frame_counter++;
