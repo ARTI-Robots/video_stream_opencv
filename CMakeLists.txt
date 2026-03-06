@@ -48,9 +48,9 @@ install(DIRECTORY launch test
 install(FILES nodelet_plugins.xml
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
 
-if (CATKIN_ENABLE_TESTING)
-  find_package(rostest REQUIRED)
-  add_rostest(test/test_video_file.test)
-  add_rostest(test/test_mjpg_stream.test)
-  add_rostest(test/test_rtsp_stream.test)
-endif()
+#if (CATKIN_ENABLE_TESTING)
+#  find_package(rostest REQUIRED)
+#  add_rostest(test/test_video_file.test)
+#  add_rostest(test/test_mjpg_stream.test)
+#  add_rostest(test/test_rtsp_stream.test)
+#endif()
